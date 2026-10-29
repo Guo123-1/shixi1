@@ -1,0 +1,45 @@
+# Unity 工程 .gitignore
+# 只提交 Assets / Packages / ProjectSettings，其余全是本地生成物
+
+# Unity 自动生成的缓存
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+[Rr]ecordings/
+
+# IDE 生成
+.vs/
+.idea/
+.vscode/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 个人环境配置
+.vsconfig
+
+# 打包产物
+*.apk
+*.aab
+*.unitypackage
+*.app
