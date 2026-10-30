@@ -852,8 +852,8 @@ MonoBehaviour:
   - {fileID: 103866185}
   - {fileID: 667547664}
   - {fileID: 623566000}
-  interval: 1
-  count: 10
+  interval: 0.05
+  count: 200
 --- !u!4 &1360659804
 Transform:
   m_ObjectHideFlags: 0

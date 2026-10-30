@@ -24,7 +24,7 @@ public class PathFollower : MonoBehaviour
         dir.y = 0f;   // 抹掉高度差，不然敌人会低头/仰头
         if (dir.sqrMagnitude > 0.0001f)
         {
-            transform.rotation = Quaternion.RotateTowards( transform.rotation,Quaternion.LookRotation(dir),turnSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(dir), turnSpeed * Time.deltaTime);
         }
 
         // 3. 到了就换下一个目标，而不是一口气走完
@@ -34,10 +34,18 @@ public class PathFollower : MonoBehaviour
             if (index >= waypoints.Length)
             {
                 arrived = true;
-                Destroy(gameObject, 1f);
                 Debug.Log("reach base");
+                Invoke(nameof(ReturnToPool), 1f);   // 原来是 Destroy，现在改成归还
             }
         }
     }
-}
 
+    // 归还给池子：状态清零 + 隐藏自己。
+    // 隐藏之后 EnemyPool.Get() 就能重新取到它。
+    void ReturnToPool()
+    {
+        index = 0;
+        arrived = false;
+        gameObject.SetActive(false);
+    }
+}
