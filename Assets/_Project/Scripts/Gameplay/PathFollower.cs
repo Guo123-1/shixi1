@@ -8,6 +8,10 @@ public class PathFollower : MonoBehaviour, IDamageable
     public float turnSpeed = 360f;   // 度/秒
     public float maxHp = 100f;
 
+    // 数值来源。注意它不由你自己在 Inspector 里拖，
+    // 而是池子取出敌人时统一注入 —— 因为同一个预制体要能变成不同的怪。
+    public EnemyData data;
+
     [SerializeField] float hp;       // 加 SerializeField 是为了运行时能在 Inspector 里看它掉血
 
     int index;        // ← 核心：当前目标点编号
@@ -22,6 +26,7 @@ public class PathFollower : MonoBehaviour, IDamageable
         index = 0;
         arrived = false;
         isDead = false;
+
         hp = maxHp;
     }
 
@@ -56,6 +61,25 @@ public class PathFollower : MonoBehaviour, IDamageable
                 Invoke(nameof(ReturnToPool), 1f);
             }
         }
+    }
+
+    /// <summary>
+    /// 把一份数值配置装到自己身上。必须在 SetActive(true) 之前调用，
+    /// 因为 OnEnable 会执行 hp = maxHp，晚一步就用到旧血量了。
+    /// </summary>
+    public void ApplyData(EnemyData d)
+    {
+        if (d == null)
+        {
+            // 以前这里是静默 return，看不出问题。改成警告：漏配数据时要能看见。
+            Debug.LogWarning($"[{name}] ApplyData 收到 null，沿用预制体上的数值", this);
+            return;
+        }
+
+        data = d;
+        maxHp = d.maxHp;
+        speed = d.speed;
+        turnSpeed = d.turnSpeed;
     }
 
     // ===== 接口要求的方法。子弹不认识 PathFollower，只认这个方法名 =====

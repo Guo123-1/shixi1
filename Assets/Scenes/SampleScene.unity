@@ -1168,6 +1168,7 @@ MonoBehaviour:
   - {fileID: 103866185}
   - {fileID: 667547664}
   - {fileID: 623566000}
+  enemyData: {fileID: 0}
   prewarmCount: 200
 --- !u!4 &1162358259
 Transform:
@@ -1214,6 +1215,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pool: {fileID: 1162358258}
+  normalData: {fileID: 11400000, guid: c1fb4311819ee1644a3b58af39f3c6b8, type: 2}
+  eliteData: {fileID: 11400000, guid: f2a1100d51d78204aa2c14499d3470d6, type: 2}
   interval: 1
   count: 10
 --- !u!4 &1360659804

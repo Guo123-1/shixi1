@@ -3,7 +3,7 @@ using UnityEngine;
 
 /// <summary>
 /// 敌人对象池。
-/// 开局一次性创建 prewarmCount 个敌人并隐藏，之后靠 Get() 取用。
+/// 开局一次性创建 prewarmCount 个敌人并隐藏，之后靠 Get(data) 取用。
 /// "归还"由敌人自己 SetActive(false) 完成，池子通过 activeSelf 判断谁在待命。
 /// </summary>
 public class EnemyPool : MonoBehaviour
@@ -34,15 +34,18 @@ public class EnemyPool : MonoBehaviour
         Debug.Log($"[Pool] 预热完成，共 {pool.Count} 个，内存 {System.GC.GetTotalMemory(false) / 1024} KB");
     }
 
-    /// <summary>从池里取一个闲置的敌人，把位置放到起点并激活</summary>
-    public PathFollower Get()
+    /// <summary>
+    /// 从池里取一个闲置的敌人，装上指定数值，放到起点并激活。
+    /// 数值走参数而不是字段：漏传会编译不过，而不是运行时静默用错。
+    /// </summary>
+    public PathFollower Get(EnemyData data)
     {
         for (int i = 0; i < pool.Count; i++)
         {
             PathFollower e = pool[i];
             if (e.gameObject.activeSelf) continue;   // 正在场上跑，跳过
 
-            Activate(e);
+            Activate(e, data);
             return e;
         }
 
@@ -50,12 +53,13 @@ public class EnemyPool : MonoBehaviour
         Debug.LogWarning("[Pool] 池子不够用，临时新建一个");
         PathFollower extra = Instantiate(enemyPrefab, transform);
         pool.Add(extra);
-        Activate(extra);
+        Activate(extra, data);
         return extra;
     }
 
-    void Activate(PathFollower e)
+    void Activate(PathFollower e, EnemyData data)
     {
+        e.ApplyData(data);            // 先装数值，再激活（OnEnable 里要用 maxHp）
         e.waypoints = waypoints;
         if (waypoints != null && waypoints.Length > 0)
         {
