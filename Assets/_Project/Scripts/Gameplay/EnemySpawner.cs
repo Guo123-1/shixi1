@@ -6,12 +6,8 @@ public class EnemySpawner : MonoBehaviour
 {
     public EnemyPool pool;
 
-    [Header("敌人种类：偶数只出 normalData，奇数只出 eliteData")]
-    public EnemyData normalData;
-    public EnemyData eliteData;
-
-    public float interval = 1f;
-    public int count = 5;
+    [Header("波次配置")]
+    public WaveData waveData;
 
     void Start()
     {
@@ -20,30 +16,43 @@ public class EnemySpawner : MonoBehaviour
             Debug.LogError("[Spawner] pool 没有指定，去 Inspector 里把 EnemyPool 拖进来");
             return;
         }
-        if (normalData == null || eliteData == null)
+
+        if (waveData == null || waveData.waves == null || waveData.waves.Length == 0)
         {
-            Debug.LogError("[Spawner] normalData / eliteData 有空槽，去 Inspector 里拖两个资产进来");
+            Debug.LogError("[Spawner] wave 没配，或表是空的");
             return;
         }
-
         Debug.Log($"[GC] 开局 {GC.GetTotalMemory(false) / 1024} KB");
         StartCoroutine(SpawnLoop());
     }
 
     IEnumerator SpawnLoop()
     {
-        // 只造一个等待对象，循环里反复用。在循环里 new 就是每一轮产生一份垃圾。
-        WaitForSeconds wait = new WaitForSeconds(interval);
-
-        for (int i = 0; i < count; i++)
+        for (int w = 0; w < waveData.waves.Length; w++)
         {
-            // 偶数只出小怪、奇数只出精英。用循环变量 i 判断，不再额外维护计数器。
-            EnemyData data = (i % 2 == 0) ? normalData : eliteData;
-            pool.Get(data);
+            if (GameManager.Instance != null && GameManager.Instance.isOver) yield break;
+            WaveDef wave = waveData.waves[w];
 
-            yield return wait;
+            // 等场上敌人清空，再休整，再宣布
+            yield return new WaitUntil(() => pool.ActiveCount == 0);
+            yield return new WaitForSeconds(wave.startDelay);
+
+            Debug.Log($"--- 第 {w + 1} 波 / 共 {waveData.waves.Length} 波 ---");
+            if (GameManager.Instance != null) GameManager.Instance.SetWave(w + 1, waveData.waves.Length);
+
+            foreach (WaveEntry entry in wave.entries)
+            {
+                WaitForSeconds wait = new WaitForSeconds(entry.interval);
+                for (int i = 0; i < entry.count; i++)
+                {
+                    pool.Get(entry.enemy);
+                    yield return wait;
+                }
+            }
         }
-
         Debug.Log($"[GC] 生成完 {GC.GetTotalMemory(false) / 1024} KB");
+
+        yield return new WaitUntil(() => pool.ActiveCount == 0);
+        if (GameManager.Instance != null) GameManager.Instance.Win();
     }
 }

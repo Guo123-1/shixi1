@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d5190ad39d67124e9b3199317b49a2d, type: 3}
+  m_Name: Turret_Heavy
+  m_EditorClassIdentifier: 
+  displayName: "\u91CD\u70AE"
+  cost: 80
+  damage: 100
+  fireInterval: 1.5
+  detectRange: 15
+  aimTolerance: 12
+  turnSpeed: 90
+  prefab: {fileID: 7866217879505456849, guid: 2fbd657045d798b4c83ed20d265937b1, type: 3}
+  bulletPrefab: {fileID: 6536457302638237302, guid: 702d52334597c6a4aa0a15463a6a10fd, type: 3}

@@ -42,5 +42,11 @@ public class Bullet : MonoBehaviour
             damageable.TakeDamage(damage);
         }
     }
+    public void Init(Transform target, float damage)
+    {
+        this.target = target;
+        this.damage = damage;
+    }
+
 }
 

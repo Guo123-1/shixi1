@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fffd0befe63f0e4fadb6e1273b96833, type: 3}
+  m_Name: Wave_01
+  m_EditorClassIdentifier: 
+  waves:
+  - startDelay: 0
+    entries:
+    - enemy: {fileID: 11400000, guid: c1fb4311819ee1644a3b58af39f3c6b8, type: 2}
+      count: 2
+      interval: 1
+    - enemy: {fileID: 11400000, guid: f2a1100d51d78204aa2c14499d3470d6, type: 2}
+      count: 1
+      interval: 2
+  - startDelay: 3
+    entries:
+    - enemy: {fileID: 11400000, guid: c1fb4311819ee1644a3b58af39f3c6b8, type: 2}
+      count: 4
+      interval: 0.5
+    - enemy: {fileID: 11400000, guid: f2a1100d51d78204aa2c14499d3470d6, type: 2}
+      count: 2
+      interval: 1
+    - enemy: {fileID: 11400000, guid: c1fb4311819ee1644a3b58af39f3c6b8, type: 2}
+      count: 5
+      interval: 0.5
+  - startDelay: 3
+    entries:
+    - enemy: {fileID: 11400000, guid: c1fb4311819ee1644a3b58af39f3c6b8, type: 2}
+      count: 4
+      interval: 0.5
+    - enemy: {fileID: 11400000, guid: f2a1100d51d78204aa2c14499d3470d6, type: 2}
+      count: 2
+      interval: 1
+    - enemy: {fileID: 11400000, guid: c1fb4311819ee1644a3b58af39f3c6b8, type: 2}
+      count: 5
+      interval: 0.5

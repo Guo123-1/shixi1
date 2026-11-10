@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7866217879505456862}
   - component: {fileID: 7866217879505456863}
   - component: {fileID: 7866217879505456848}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,14 +111,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47901c507a861e740a0a2035fed5a9d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 385f379ca1f9dc44da7cd395780b336a, type: 2}
   firePoint: {fileID: 7866217881316891854}
-  bulletPrefab: {fileID: 6536457302638237302, guid: 702d52334597c6a4aa0a15463a6a10fd, type: 3}
-  detectRange: 10
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
-  aimTolerance: 10
-  fireInterval: 0.5
 --- !u!1 &7866217881316891855
 GameObject:
   m_ObjectHideFlags: 0

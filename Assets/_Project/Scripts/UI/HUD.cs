@@ -1,5 +1,6 @@
-using UnityEngine;
 using TMPro;   // TextMeshProUGUI 在这个命名空间里
+using UnityEngine;
+//using static GameManager;
 
 /// <summary>
 /// 屏幕左上角的战况显示。
@@ -9,10 +10,15 @@ public class HUD : MonoBehaviour
 {
     public TextMeshProUGUI killText;
     public TextMeshProUGUI lifeText;
+    public TextMeshProUGUI waveText;
+    public TextMeshProUGUI goldText;
+    public TextMeshProUGUI resultText;   // 场景里先做成隐藏状态
+
 
     int lastKills = -1;    // 故意初始成 -1：保证第一帧一定会刷一次
     int lastLives = -1;
-
+    int lastWave = -1;
+    int lastGold = -1;
     void Update()
     {
         GameManager gm = GameManager.Instance;
@@ -29,5 +35,21 @@ public class HUD : MonoBehaviour
             lastLives = gm.lives;
             lifeText.text = $"Lives: {gm.lives}";
         }
+        if (gm.currentWave != lastWave)
+        {
+            lastWave = gm.currentWave;
+            waveText.text = $"Wave: {gm.currentWave}/{gm.totalWaves}";
+        }
+        if (gm.gold != lastGold)
+        {
+            lastGold = gm.gold;
+            goldText.text = $"Gold: {gm.gold}";
+        }
+        if (gm.isOver && !resultText.gameObject.activeSelf)
+        {
+            resultText.gameObject.SetActive(true);
+            resultText.text = gm.state == GameManager.GameState.Won ? "You Win" : "You Lose";
+        }
+
     }
 }

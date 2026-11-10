@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e281d6d20bfc4d4daf4c4c9d689cbfa, type: 3}
   m_Name: EliteData
   m_EditorClassIdentifier: 
-  displayName: 精英
+  displayName: "\u7CBE\u82F1"
   maxHp: 200
-  speed: 3
+  speed: 2
   turnSpeed: 360

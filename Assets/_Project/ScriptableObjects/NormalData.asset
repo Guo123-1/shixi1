@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e281d6d20bfc4d4daf4c4c9d689cbfa, type: 3}
   m_Name: NormalData
   m_EditorClassIdentifier: 
-  displayName: 小怪
+  displayName: "\u5C0F\u602A"
   maxHp: 100
-  speed: 2
+  speed: 4
   turnSpeed: 360

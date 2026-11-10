@@ -35,6 +35,23 @@ public class EnemyPool : MonoBehaviour
     }
 
     /// <summary>
+    /// 场上还活着的敌人数量。
+    /// 池子用 activeSelf 判断闲忙，所以"没被隐藏的"就是在场上的。
+    /// </summary>
+    public int ActiveCount
+    {
+        get
+        {
+            int n = 0;
+            for (int i = 0; i < pool.Count; i++)
+            {
+                if (pool[i].gameObject.activeSelf) n++;
+            }
+            return n;
+        }
+    }
+
+    /// <summary>
     /// 从池里取一个闲置的敌人，装上指定数值，放到起点并激活。
     /// 数值走参数而不是字段：漏传会编译不过，而不是运行时静默用错。
     /// </summary>

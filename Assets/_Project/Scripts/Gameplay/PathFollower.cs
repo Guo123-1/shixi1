@@ -92,8 +92,8 @@ public class PathFollower : MonoBehaviour, IDamageable
 
         if (hp <= 0f)
         {
-            if (GameManager.Instance != null) GameManager.Instance.AddKill();
             isDead = true;
+            GameEvents.RaiseEnemyDied();
             Debug.Log("enemy died, hp=0");
             ReturnToPool();          // 死亡立即回池，不用等 1 秒
         }
