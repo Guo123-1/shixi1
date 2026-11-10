@@ -1,0 +1,17 @@
+NotoSansSC-VF.ttf
+=================
+
+来源：Noto Sans SC（思源黑体的 Google 版本），随 Windows 系统附带于 C:\Windows\Fonts
+许可：SIL Open Font License 1.1 (OFL-1.1)
+      允许免费使用、修改、再分发，包括商业用途；
+      再分发时需保留本许可声明，且不得单独售卖字体文件本身。
+官方：https://fonts.google.com/noto/specimen/Noto+Sans+SC
+
+为什么用这个而不是微软雅黑（msyh.ttc / simhei.ttf）：
+  微软雅黑、黑体属于微软 / 中易的字形，只授权在 Windows 上使用，
+  不允许随项目一起分发。把系统字体打进公开仓库是有版权风险的。
+  Noto / 思源系列是 OFL 授权，可以合法地放在开源项目里。
+
+使用方式：
+  Window → TextMeshPro → Font Asset Creator 生成 SDF 字体资源
+  （Atlas Population Mode 选 Dynamic，运行时按需生成字形）

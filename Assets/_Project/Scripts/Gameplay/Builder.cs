@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Builder : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class Builder : MonoBehaviour
     public float buildRadius = 0.8f;
 
     int selected;
-
+    public int SelectedIndex => selected;      // 给 UI 读
     TurretData Current
     {
         get
@@ -29,6 +30,7 @@ public class Builder : MonoBehaviour
         if (current == null) return;
 
         if (!Input.GetMouseButtonDown(0)) return;
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (!Physics.Raycast(ray, out RaycastHit hit, 100f, groundLayer)) return;
@@ -51,11 +53,10 @@ public class Builder : MonoBehaviour
         turret.ApplyData(current);
     }
 
-    void Select(int index)
+    public void Select(int index)
     {
-        if (turretOptions == null || index >= turretOptions.Length) return;
+        if (turretOptions == null || index < 0 || index >= turretOptions.Length) return;
         selected = index;
-        Debug.Log($"选中 {turretOptions[index].displayName}（{turretOptions[index].cost} 金）");
     }
 }
 

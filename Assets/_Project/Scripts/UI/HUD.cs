@@ -1,6 +1,5 @@
 using TMPro;   // TextMeshProUGUI 在这个命名空间里
 using UnityEngine;
-//using static GameManager;
 
 /// <summary>
 /// 屏幕左上角的战况显示。
@@ -27,28 +26,28 @@ public class HUD : MonoBehaviour
         if (gm.kills != lastKills)
         {
             lastKills = gm.kills;
-            killText.text = $"Kills: {gm.kills}";
+            killText.text = $"击杀：{gm.kills}";
         }
 
         if (gm.lives != lastLives)
         {
             lastLives = gm.lives;
-            lifeText.text = $"Lives: {gm.lives}";
+            lifeText.text = $"生命：{gm.lives}";
         }
         if (gm.currentWave != lastWave)
         {
             lastWave = gm.currentWave;
-            waveText.text = $"Wave: {gm.currentWave}/{gm.totalWaves}";
+            waveText.text = $"波次：{gm.currentWave}/{gm.totalWaves}";
         }
         if (gm.gold != lastGold)
         {
             lastGold = gm.gold;
-            goldText.text = $"Gold: {gm.gold}";
+            goldText.text = $"金币：{gm.gold}";
         }
         if (gm.isOver && !resultText.gameObject.activeSelf)
         {
             resultText.gameObject.SetActive(true);
-            resultText.text = gm.state == GameManager.GameState.Won ? "You Win" : "You Lose";
+            resultText.text = gm.state == GameManager.GameState.Won ? "胜利" : "失败";
         }
 
     }
